@@ -16,7 +16,7 @@ from pcdet.datasets import DatasetTemplate
 
 
 class BaseKittiDataset(DatasetTemplate):
-    def __init__(self, root_path, split='train'):
+    def __init__(self, root_path, split='test'):
         super().__init__()
         self.root_path = root_path
         self.root_split_path = os.path.join(self.root_path, 'training' if split != 'test' else 'testing')
@@ -476,21 +476,21 @@ def create_kitti_infos(data_path, save_path, workers=4):
 
     print('---------------Start to generate data infos---------------')
 
-    dataset.set_split(train_split)
-    kitti_infos_train = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
-    with open(train_filename, 'wb') as f:
-        pickle.dump(kitti_infos_train, f)
-    print('Kitti info train file is saved to %s' % train_filename)
+#     dataset.set_split(train_split)
+#     kitti_infos_train = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
+#     with open(train_filename, 'wb') as f:
+#         pickle.dump(kitti_infos_train, f)
+#     print('Kitti info train file is saved to %s' % train_filename)
 
-    dataset.set_split(val_split)
-    kitti_infos_val = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
-    with open(val_filename, 'wb') as f:
-        pickle.dump(kitti_infos_val, f)
-    print('Kitti info val file is saved to %s' % val_filename)
+#     dataset.set_split(val_split)
+#     kitti_infos_val = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
+#     with open(val_filename, 'wb') as f:
+#         pickle.dump(kitti_infos_val, f)
+#     print('Kitti info val file is saved to %s' % val_filename)
 
-    with open(trainval_filename, 'wb') as f:
-        pickle.dump(kitti_infos_train + kitti_infos_val, f)
-    print('Kitti info trainval file is saved to %s' % trainval_filename)
+#     with open(trainval_filename, 'wb') as f:
+#         pickle.dump(kitti_infos_train + kitti_infos_val, f)
+#     print('Kitti info trainval file is saved to %s' % trainval_filename)
 
     dataset.set_split('test')
     kitti_infos_test = dataset.get_infos(num_workers=workers, has_label=False, count_inside_pts=False)
@@ -499,8 +499,8 @@ def create_kitti_infos(data_path, save_path, workers=4):
     print('Kitti info test file is saved to %s' % test_filename)
 
     print('---------------Start create groundtruth database for data augmentation---------------')
-    dataset.set_split(train_split)
-    dataset.create_groundtruth_database(train_filename, split=train_split)
+#     dataset.set_split(train_split)
+#     dataset.create_groundtruth_database(train_filename, split=train_split)
 
     print('---------------Data preparation Done---------------')
 
